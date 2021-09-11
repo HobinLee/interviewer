@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import { questions } from '../questions';
+import { Link } from 'react-router-dom';
+import { questions } from '../../questions';
 
 const MILLSEC_PER_SEC :number = 1000;
 
-export default () => {
+const InterviewRoom = () => {
   const [restQuestions, setRestQuestions] = useState(questions);
   const [questionList, setQuestionList] = useState<string[]>([]);
   const [timer, setTimer] = useState(new Date().getTime());
@@ -22,6 +23,9 @@ export default () => {
     <h2>
       {restQuestions[0] ?? '고생하셨습니다!'}
     </h2>
-    {restQuestions[0] && <button onClick={handelNextQuestion}>next</button>}
+    {restQuestions[0] ? <button onClick={handelNextQuestion}>next</button>:
+    <Link to="/review">review</Link>}
   </div>
 }
+
+export default InterviewRoom;
