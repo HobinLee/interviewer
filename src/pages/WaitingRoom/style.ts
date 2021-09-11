@@ -1,6 +1,6 @@
 import style from "styled-components";
 
-export const WaitingRoomWrapper = style.div`
+export const WaitingRoomWrapper = style.main`
   display: flex;
   align-items: center;
   justify-content: center;

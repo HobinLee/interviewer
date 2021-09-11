@@ -1,6 +1,6 @@
 import style from "styled-components";
 
-export const InterviewRoomWrapper = style.div`
+export const InterviewRoomWrapper = style.main`
   background: #333;
   color: #fff;
   width: 100vw;
