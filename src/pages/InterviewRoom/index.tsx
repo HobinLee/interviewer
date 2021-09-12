@@ -1,25 +1,34 @@
-import React, {useState, useEffect} from "react";
+import {useState } from "react";
 import { Link } from "react-router-dom";
-import { questions } from "../../questions";
 import { InterviewRoomWrapper } from "./style";
 import { MdCallEnd } from "react-icons/md";
 import { GrNext } from "react-icons/gr";
 import { AiOutlineFileSearch } from "react-icons/ai";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { Answer, answerState, Seconds, Question, questionState } from "../../store/question";
 
 const MILLSEC_PER_SEC :number = 1000;
 
 const InterviewRoom = () => {
-  const [restQuestions, setRestQuestions] = useState(questions);
-  const [questionList, setQuestionList] = useState<string[]>([]);
+  const questions = useRecoilValue<Question[]>(questionState);
+  const [answerList, setAnswerList] = useRecoilState<Answer[]>(answerState);
+  
+  const [index, setIndex] = useState(0);
   const [timer, setTimer] = useState(new Date().getTime());
+
   const handelNextQuestion = () => {
     const now = new Date().getTime();
 
-    const q: string | undefined = restQuestions.shift();
-    q && setQuestionList([...questionList, q]);
-    setRestQuestions(restQuestions);
-    console.log(`Q. ${q}`, `${(now - timer)/MILLSEC_PER_SEC}초`);
 
+    const time: Seconds = (now - timer) / MILLSEC_PER_SEC;
+    
+    const answer: Answer = {
+      question: questions[index],
+      time
+    }
+
+    setAnswerList([...answerList, answer]);
+    setIndex(index + 1);
     setTimer(now);
   }
 
@@ -27,7 +36,7 @@ const InterviewRoom = () => {
     <div className="interviewers">
       <div className="interviewer">
         <div className="profile"></div>
-        <h3 className="question">"{restQuestions[0] ?? "고생하셨습니다"}"</h3>
+        <h3 className="question">"{questions[index] ?? "고생하셨습니다"}"</h3>
       </div>
       <div className="interviewer">
         <div className="profile"></div>
@@ -37,7 +46,7 @@ const InterviewRoom = () => {
       <div className="profile"></div>
     </div>
     <div className="footer">
-      {restQuestions[0] ?
+      {questions[index] ?
         <button className="next-button" onClick={handelNextQuestion}>
           <GrNext/>
         </button>
