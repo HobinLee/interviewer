@@ -103,4 +103,12 @@ export const InterviewRoomWrapper = style.main`
   .interviewee {
     position: relative;
   }
+
+  .start-time {
+    position: absolute;
+    font-size: 2rem;
+    left: 2rem;
+    bottom: 2rem;
+    color: white;
+  }
 `
