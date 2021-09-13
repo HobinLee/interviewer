@@ -72,6 +72,10 @@ export const InterviewRoomWrapper = style.main`
       outline: none;
       border: none;
       cursor: pointer;
+
+      &:disabled {
+        opacity: 0.5;
+      }
     }
 
     a {
