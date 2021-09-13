@@ -72,6 +72,10 @@ export const InterviewRoomWrapper = style.main`
       outline: none;
       border: none;
       cursor: pointer;
+
+      &:disabled {
+        opacity: 0.5;
+      }
     }
 
     a {
@@ -98,5 +102,13 @@ export const InterviewRoomWrapper = style.main`
 
   .interviewee {
     position: relative;
+  }
+
+  .start-time {
+    position: absolute;
+    font-size: 2rem;
+    left: 2rem;
+    bottom: 2rem;
+    color: white;
   }
 `
