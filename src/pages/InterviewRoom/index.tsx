@@ -17,6 +17,7 @@ const InterviewRoom = () => {
   const [standby, setStandby] = useState(true);
   const [index, setIndex] = useState(0);
   const [timer, setTimer] = useState(new Date().getTime());
+  const [startTime] = useState(new Date().toString().slice(16, 25));
 
   useEffect(() => {
     if (!standby) {
@@ -74,6 +75,9 @@ const InterviewRoom = () => {
         <MdCallEnd/>
       </Link>
     </div>
+    <span className="start-time">
+      start from {startTime}
+    </span>
   </InterviewRoomWrapper>
 }
 
