@@ -10,3 +10,8 @@ export function shuffle<T> (arr: T[]): T[] {
 
   return arr;
 }
+
+//질문 n개 뽑기
+export function draw<T> (arr: T[], n: number): T[] {
+  return shuffle(arr).slice(0, n);
+}
