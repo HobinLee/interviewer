@@ -6,7 +6,7 @@ export type Question = string;
 
 export const questionState = atom<Question[]>({
   key: "question",
-  default: shuffle<Question>(questions)
+  default: [ ...questions.begin, ...shuffle<Question>(questions.middle), ...questions.end]
 });
 
 export type Seconds = number;
