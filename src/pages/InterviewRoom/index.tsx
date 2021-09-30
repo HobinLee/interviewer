@@ -7,6 +7,7 @@ import { AiOutlineFileSearch } from "react-icons/ai";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Answer, answerState, Seconds, Question, questionState } from "../../store/question";
 import QuestionBox from "./QuestionBox";
+import enter from "../../assets/audios/enter.mp3"
 
 const MILLSEC_PER_SEC :number = 1000;
 
@@ -43,6 +44,7 @@ const InterviewRoom = () => {
   }
 
   return <InterviewRoomWrapper>
+    <audio src={enter} autoPlay/>
     <div className="interviewers">
       <div className="interviewer">
         <div className="profile"></div>
