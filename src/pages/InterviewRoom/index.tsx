@@ -8,6 +8,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { Answer, answerState, Seconds, Question, questionState } from "../../store/question";
 import QuestionBox from "./QuestionBox";
 import enter from "../../assets/audios/enter.mp3"
+import StartButton from "./StartButton";
 
 const MILLSEC_PER_SEC :number = 1000;
 
@@ -15,12 +16,17 @@ const InterviewRoom = () => {
   const questions = useRecoilValue<Question[]>(questionState);
   const [answerList, setAnswerList] = useRecoilState<Answer[]>(answerState);
   
+  const [start, setStart] = useState(false);
   const [standby, setStandby] = useState(true);
   const [index, setIndex] = useState(0);
   const [timer, setTimer] = useState(new Date().getTime());
   const [startTime] = useState(new Date().toString().slice(16, 25));
 
   useEffect(() => {
+    if (!start) {
+      return;
+    }
+
     if (!standby) {
       setTimer(new Date().getTime());
       return;
@@ -54,10 +60,13 @@ const InterviewRoom = () => {
       </div>
     </div>
     {
-      questions[index] ?
-      <QuestionBox question={questions[index]} setStandby={setStandby} />
+      start ?
+        questions[index] ?
+        <QuestionBox question={questions[index]} setStandby={setStandby} />
+        :
+        <h3>고생하셨습니다</h3>
       :
-      <h3>고생하셨습니다</h3>
+      <StartButton setStart={() => setStart(true)}/>
     }
     <div className="interviewee">
       <div className="profile"></div>
