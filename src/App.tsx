@@ -1,5 +1,5 @@
 import { Route } from "react-router";
-import { WaitingRoom, InterviewRoom, ReviewRoom } from "./pages";
+import { WaitingRoom, InterviewRoom, ReviewRoom, SettingRoom } from "./pages";
 
 function App() {
   return (
@@ -7,6 +7,7 @@ function App() {
       <Route exact path="/" component ={WaitingRoom}/>
       <Route path="/interview" component={InterviewRoom}/>
       <Route path="/review" component={ReviewRoom}/>
+      <Route path="/setting" component={SettingRoom}/>
     </div>
   );
 }
