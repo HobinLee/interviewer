@@ -18,6 +18,13 @@ const getQuestions = ({ essentials, rest }: MiddleQuestions): Question[] => {
   return shuffle(questions);
 }
 
+export type QuestionSet = {
+  begin: Question[],
+  essential: Question[],
+  random: Question[],
+  end: Question[]
+}
+
 export const questionState = atom<Question[]>({
   key: "question",
   default: [ ...questions.begin,
@@ -37,9 +44,9 @@ export const answerState = atom<Answer[]>({
   default: []
 })
 
-export type QuestionSet = string;
+export type QuestionSetKey = string;
 
-export const questionSetState = atom<QuestionSet>({
+export const questionSetKeyState = atom<QuestionSetKey>({
   key: "question",
   default: "default"
 });

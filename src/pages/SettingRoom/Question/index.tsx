@@ -34,23 +34,27 @@ const QuestionElement = ({question, modifyQuestion, deleteQuestion}: QuestionPro
   if (isModify) {
     return <QuestionElementWrapper>
       <input value={modifiedQuestion} onChange={handleModifiedQuestion}></input>
-      <button onClick={handleConfirmModify}>
-        수정 완료
-      </button>
-      <button onClick={handleCancelModify}>
-        수정 취소
-      </button>
+      <div>
+        <button onClick={handleConfirmModify}>
+          수정 완료
+        </button>
+        <button onClick={handleCancelModify}>
+          수정 취소
+        </button>
+      </div>
     </QuestionElementWrapper>;
   }
 
   return <QuestionElementWrapper>
-    <h3>{question}</h3>
-    <button onClick={handleModify}>
-      수정
-    </button>
-    <button onClick={deleteQuestion}>
-      삭제
-    </button>
+    <h5>{question}</h5>
+    <div>
+      <button onClick={handleModify}>
+        수정
+      </button>
+      <button onClick={deleteQuestion}>
+        삭제
+      </button>
+    </div>
   </QuestionElementWrapper>;
 }
 

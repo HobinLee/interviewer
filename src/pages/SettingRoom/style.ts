@@ -11,9 +11,5 @@ export const SettingRoomWrapper = style.main`
     display: flex;
     flex-direction: column;
     font-size: 2rem;
-    
-    &__add-qestion-button {
-
-    }
   }
 `
