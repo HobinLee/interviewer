@@ -5,15 +5,32 @@ import { MdCallEnd } from "react-icons/md";
 import { GrNext } from "react-icons/gr";
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { Answer, answerState, Seconds, Question, questionState } from "../../store/question";
+import { Answer, answerState, Seconds, Question, questionState, QuestionSet, questionSetKeyState, QuestionSetKey } from "../../store/question";
 import QuestionBox from "./QuestionBox";
 import enter from "../../assets/audios/enter.mp3"
 import StartButton from "./StartButton";
+import { draw, shuffle } from "../../utils";
 
 const MILLSEC_PER_SEC :number = 1000;
 
+type MiddleQuestions = {
+  essential: Question[],
+  random: Question[]
+}
+ 
+const getQuestions = ({ essential, random }: MiddleQuestions): Question[] => {
+    const QUESTION_COUNT = 15;
+    const restCount = QUESTION_COUNT - essential.length;
+
+  const questions: Question[] = [...essential, ...draw(random, restCount)];
+
+  return shuffle(questions);
+}
+
+
 const InterviewRoom = () => {
-  const questions = useRecoilValue<Question[]>(questionState);
+  const questionSetKey = useRecoilValue<QuestionSetKey>(questionSetKeyState);
+  const [questions, setQuestions] = useRecoilState<Question[]>(questionState);
   const [answerList, setAnswerList] = useRecoilState<Answer[]>(answerState);
   
   const [start, setStart] = useState(false);
@@ -32,6 +49,19 @@ const InterviewRoom = () => {
       return;
     }
   }, [standby]);
+
+  const shuffleQuestion = (): Question[] => {
+    const questionSet: QuestionSet = JSON.parse(localStorage.getItem(questionSetKey) ?? '{}');
+
+    return [ ...questionSet.begin,
+      ...getQuestions(questionSet),
+      ...questionSet.end ]
+  }
+
+  const startQuestion = () => {
+    setQuestions(shuffleQuestion);
+    setStart(true);
+  }
 
   const handelNextQuestion = () => {
     const now = new Date().getTime();
@@ -66,7 +96,7 @@ const InterviewRoom = () => {
         :
         <h3>고생하셨습니다</h3>
       :
-      <StartButton setStart={() => setStart(true)}/>
+      <StartButton setStart={startQuestion}/>
     }
     <div className="interviewee">
       <div className="profile"></div>
