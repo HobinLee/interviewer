@@ -36,3 +36,10 @@ export const answerState = atom<Answer[]>({
   key: "result",
   default: []
 })
+
+export type QuestionSet = string;
+
+export const questionSetState = atom<QuestionSet>({
+  key: "question",
+  default: "default"
+});
