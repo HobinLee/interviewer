@@ -1,28 +1,17 @@
 import { atom, RecoilState } from "recoil";
-import { questions } from "../questions";
-import { shuffle, draw } from "../utils";
 
 export type Question = string;
 
-type MiddleQuestions = {
-  essentials: Question[],
-  rest: Question[]
-}
- 
-const getQuestions = ({ essentials, rest }: MiddleQuestions): Question[] => {
-    const QUESTION_COUNT = 15;
-    const restCount = QUESTION_COUNT - essentials.length;
-
-  const questions: Question[] = [...essentials, ...draw(rest, restCount)];
-
-  return shuffle(questions);
+export type QuestionSet = {
+  begin: Question[],
+  essential: Question[],
+  random: Question[],
+  end: Question[]
 }
 
 export const questionState = atom<Question[]>({
   key: "question",
-  default: [ ...questions.begin,
-    ...getQuestions(questions.middle),
-    ...questions.end ]
+  default: []
 });
 
 export type Seconds = number;
@@ -36,3 +25,10 @@ export const answerState = atom<Answer[]>({
   key: "result",
   default: []
 })
+
+export type QuestionSetKey = string;
+
+export const questionSetKeyState = atom<QuestionSetKey>({
+  key: "questionSetKey",
+  default: "default"
+});
