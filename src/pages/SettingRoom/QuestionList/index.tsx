@@ -48,6 +48,7 @@ const QuestionList = ({ type }: QuestionListProps) => {
 
   const questionList = list.map((q: Question, idx: number) => 
     <QuestionElement
+      key={idx + q}
       question={q}
       modifyQuestion={(newQ: Question) => modifyQuestion(newQ, idx)}
       deleteQuestion={() => setList(list.filter((_, i: number) => i !== idx))}

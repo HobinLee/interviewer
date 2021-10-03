@@ -2,6 +2,7 @@ import style from "styled-components";
 
 export const SettingRoomWrapper = style.main`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 90vh;
@@ -12,4 +13,6 @@ export const SettingRoomWrapper = style.main`
     flex-direction: column;
     font-size: 2rem;
   }
+
+  font-size: 2rem;
 `
