@@ -6,19 +6,22 @@ import { ReviewRoomWrapper } from "./style";
 const ReviewRoom = () => {
   const answers: Answer[] = useRecoilValue<Answer[]>(answerState);
 
-  const answerList = answers.map((answer, idx) => <li key={idx}>
-    <span>
-      <strong>{answer.question}</strong>
-      ({answer.time}')
-    </span>
-  </li>);
+  const answerList = answers.map((answer, idx) =>  <tr>
+      <td>{answer.question}</td>
+      <td>{answer.time}'</td>
+    </tr>);
 
   return (
     <ReviewRoomWrapper>
       <h3>Review</h3>
-      <ul>
+      <table className="review-table">
+        <tr>
+          <th>Questions</th>
+          <th>Time</th>
+        </tr>
         {answerList}
-      </ul>
+      </table>
+
       <Link to="/">
         again
       </Link>
